@@ -4,10 +4,25 @@
 
     <article>
         <h2>{{  article.title }}</h2>
-        <div class="metadata">Ecrit le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i') }} dans la catégorie sport</div>
+        <div class="metadata">Ecrit le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i') }} dans la catégorie {{article.category.title}}</div>
         <div class="content"><img src="{{ article.image }}" alt="">
             {{ article.content | raw }}
         </div>
     </article>
+    <section id="commentaires">
+        {% for comment in article.comments %}
+            <br><br>
+        <div class="commment">
+            <sdiv class="row">
+                <div class="col-3">
+                    {{ comment.author }} (<small>{{ comment.createdAt | date ("d/m/Y à H:i") }} </small>
+                </div>
+                <div class="col">
+                    {{ comment.content | raw }}
+                </div>
+            </sdiv>
+        </div>
+        {% endfor %}
+    </section>
 
 {% endblock %}
